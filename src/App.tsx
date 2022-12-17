@@ -1,4 +1,11 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import {
+    BrowserRouter,
+    Route,
+    Routes,
+    Navigate,
+    Outlet,
+    Link,
+} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -17,9 +24,29 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/user" element={<UserPage />} />
-                    <Route path="/usuario" element={<Navigate to={'/user'}/>} />
+                    <Route
+                        path="/usuario"
+                        element={<Navigate to={"/user"} />}
+                    />
                     <Route path="/user/:id" element={<UserPages />} />
-                    <Route path="/dashboard/*" element={<Dashboard/>}></Route>
+                    <Route path="/dashboard/*" element={<Dashboard />}>
+                        <Route
+                            path="welcome/*"
+                            element={
+                                <>
+                                    <p>Welcome</p>
+                                    <Outlet />
+                                    <Link to={'user'}>Usuario</Link>
+                                </>
+                            }
+                        >
+                            <Route
+                                path="user"
+                                element={<p>Usuario welcome</p>}
+                            />
+                        </Route>
+                        <Route path="goodbye" element={<p>Goodbye</p>} />
+                    </Route>
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </BrowserRouter>

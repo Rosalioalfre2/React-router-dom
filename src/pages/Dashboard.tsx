@@ -1,4 +1,4 @@
-import { useNavigate, Route, Routes, Link } from "react-router-dom";
+import { useNavigate, Link, Outlet } from "react-router-dom";
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -12,11 +12,13 @@ function Dashboard() {
             <h1>Dashboard</h1>
             <button onClick={handleClick}>Logout</button>
 
-            <Link to={'welcome'}>Welcome</Link>
+            <br />
+            <Link to={"welcome"}>Welcome</Link>
+            <br />
+            <Link to={"goodbye"}>Goodbye</Link>
 
-            <Routes>
-                <Route path="welcome" element={<p>Welcome</p>} />
-            </Routes>
+            <Outlet />
+            {/* En Outlet pinta lo que esta fuera de la ruta */}
         </>
     );
 }
